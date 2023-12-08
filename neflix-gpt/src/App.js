@@ -1,13 +1,13 @@
-import One from './One';
 import Body from "./components/Body"
+import Header from './components/Header';
 
 function App() {
   return (
   <>
-  <Body/>
-  
+      <Header/>
+      <Body/>
   </>
-    
+  
   )
 }
 
