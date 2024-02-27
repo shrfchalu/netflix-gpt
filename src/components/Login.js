@@ -1,7 +1,10 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../utils/firebase";
 
 const Login = () => {
@@ -14,10 +17,7 @@ const Login = () => {
 
   const handleButtonCLick = () => {
     //Validate the form data
-    const message = checkValidData(
-      email.current.value,
-      password.current.value
-    );
+    const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
 
     if (message) return;
@@ -40,17 +40,22 @@ const Login = () => {
         });
     } else {
       //SignIn Logic
-      signInWithEmailAndPassword(auth, email, password)
-  .then((userCredential) => {
-    // Signed in 
-    const user = userCredential.user;
-    console.log(user);
-  })
-  .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode+'-'+errorMessage);
-  });
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.log(errorCode + "-" + errorMessage);
+          setErrorMessage(errorCode+'-'+errorMessage);
+        });
     }
   };
 
@@ -67,7 +72,7 @@ const Login = () => {
           alt="bg-img"
         />
       </div>
-      
+
       <form
         onSubmit={(e) => e.preventDefault()}
         className="absolute w-3/12 p-10 bg-black my-36 mx-auto right-0 left-0 text-white rounded-xl bg-opacity-80 "
@@ -75,6 +80,7 @@ const Login = () => {
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
+
         {!isSignInForm && (
           <input
             ref={name}
