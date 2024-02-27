@@ -1,14 +1,13 @@
 import Body from "./components/Body"
-import Header from './components/Header';
+import Header from "./components/Header";
 
 function App() {
   return (
-  <>
-      <Header/>
+    <>
+      <Header />
       <Body/>
-  </>
-  
-  )
+    </>
+  );
 }
 
 export default App;
